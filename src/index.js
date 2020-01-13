@@ -11,7 +11,7 @@ import keys from './config/keys';
 import cors from 'cors';
 
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 80;
 app.use(cors());
 app.use(cookieParser());
 
