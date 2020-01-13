@@ -20,6 +20,11 @@ const cors_options = {
 app.use(cors(cors_options));
 app.use(cookieParser());
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
+
 mongoose.connect(keys.mongodb.dbURI, { useNewUrlParser: true }, () => {
   console.log("connected to mongodb");
 });
