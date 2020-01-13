@@ -17,37 +17,22 @@ const cors_options = {
   origin: 'https://raphael-pics.herokuapp.com',
   optionsSuccessStatus: 200
 }
-//app.use(cookieParser());
+app.use(cors(cors_options));
+app.use(cookieParser());
 
-// app.use((req, res, next) => {
-//   res.headers: {
-//   "Access-Control-Allow-Origin": "*",
-//   "Access-Control-Allow-Credentials": true
-// },
-//   //res.header("Access-Control-Allow-Origin", process.env.ORIGIN || "*");
-// //  res.header("Access-Control-Allow-Origin", "*");
-//   next();
-// });
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", process.env.ORIGIN || "*");
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("TESTING123", "123");
+  next();
+});
 
 mongoose.connect(keys.mongodb.dbURI, { useNewUrlParser: true }, () => {
-//  app.use((req, res, next) => {
-  //   res.headers: {
-  //   "Access-Control-Allow-Origin": "*",
-  //   "Access-Control-Allow-Credentials": true
-  // },
-    //res.header("Access-Control-Allow-Origin", process.env.ORIGIN || "*");
-  //  res.header("Access-Control-Allow-Origin", "*");
-  //  next();
-  app.use(cors());
-
-  });
   console.log("connected to mongodb");
 });
 
 var imageDir = require('path').join(__dirname,'/images');
 console.log(imageDir);
-app.use(cors(cors_options));
-
 app.use(bodyParser.json());
 //app.use('/api/auth', auth_routs);
 app.use('/api/db', db_routs);
