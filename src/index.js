@@ -12,7 +12,12 @@ import cors from 'cors';
 
 const app = express();
 const port = process.env.PORT || 80;
-app.use(cors());
+
+const cors_options = {
+  origin: 'https://raphael-pics.herokuapp.com',
+  optionsSuccessStatus: 200
+}
+app.use(cors(cors_options));
 app.use(cookieParser());
 
 mongoose.connect(keys.mongodb.dbURI, { useNewUrlParser: true }, () => {
