@@ -12,15 +12,15 @@ import cors from 'cors';
 
 const app = express();
 const port = process.env.PORT || 80;
-//
-// const cors_options = {
-//   origin: 'https://raphael-pics.herokuapp.com',
-//   optionsSuccessStatus: 200
-// }
-// app.use(cors(cors_options));
+
+const cors_options = {
+  origin: 'https://raphael-pics.herokuapp.com',
+  optionsSuccessStatus: 200
+}
 app.use(cookieParser());
 
 app.use((req, res, next) => {
+  //res.header("Access-Control-Allow-Origin", process.env.ORIGIN || "*");
   res.header("Access-Control-Allow-Origin", "*");
   next();
 });
@@ -31,6 +31,8 @@ mongoose.connect(keys.mongodb.dbURI, { useNewUrlParser: true }, () => {
 
 var imageDir = require('path').join(__dirname,'/images');
 console.log(imageDir);
+app.use(cors(cors_options));
+
 app.use(bodyParser.json());
 //app.use('/api/auth', auth_routs);
 app.use('/api/db', db_routs);
