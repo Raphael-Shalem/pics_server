@@ -17,15 +17,28 @@ const cors_options = {
   origin: 'https://raphael-pics.herokuapp.com',
   optionsSuccessStatus: 200
 }
-app.use(cookieParser());
+//app.use(cookieParser());
 
 app.use((req, res, next) => {
+  res.headers: {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Credentials": true
+},
   //res.header("Access-Control-Allow-Origin", process.env.ORIGIN || "*");
-  res.header("Access-Control-Allow-Origin", "*");
+//  res.header("Access-Control-Allow-Origin", "*");
   next();
 });
 
 mongoose.connect(keys.mongodb.dbURI, { useNewUrlParser: true }, () => {
+  app.use((req, res, next) => {
+    res.headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Credentials": true
+  },
+    //res.header("Access-Control-Allow-Origin", process.env.ORIGIN || "*");
+  //  res.header("Access-Control-Allow-Origin", "*");
+    next();
+  });
   console.log("connected to mongodb");
 });
 
