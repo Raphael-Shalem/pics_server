@@ -19,25 +19,27 @@ const cors_options = {
 }
 //app.use(cookieParser());
 
-app.use((req, res, next) => {
-  res.headers: {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Credentials": true
-},
-  //res.header("Access-Control-Allow-Origin", process.env.ORIGIN || "*");
-//  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
+// app.use((req, res, next) => {
+//   res.headers: {
+//   "Access-Control-Allow-Origin": "*",
+//   "Access-Control-Allow-Credentials": true
+// },
+//   //res.header("Access-Control-Allow-Origin", process.env.ORIGIN || "*");
+// //  res.header("Access-Control-Allow-Origin", "*");
+//   next();
+// });
 
 mongoose.connect(keys.mongodb.dbURI, { useNewUrlParser: true }, () => {
-  app.use((req, res, next) => {
-    res.headers: {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Credentials": true
-  },
+//  app.use((req, res, next) => {
+  //   res.headers: {
+  //   "Access-Control-Allow-Origin": "*",
+  //   "Access-Control-Allow-Credentials": true
+  // },
     //res.header("Access-Control-Allow-Origin", process.env.ORIGIN || "*");
   //  res.header("Access-Control-Allow-Origin", "*");
-    next();
+  //  next();
+  app.use(cors());
+
   });
   console.log("connected to mongodb");
 });
